@@ -28,3 +28,10 @@ script:
     --coverage-clover=/home/travis/build/heiko-hardt/t3ee_voting_example/coverage.clover
     --configuration typo3conf/ext/t3ee_voting_example/Build/UnitTests.travis.xml
     typo3conf/ext/t3ee_voting_example/Tests/Unit;
+
+  - echo
+  - echo "Commit code coverage"
+  - >
+    cd /home/travis/build/heiko-hardt/t3ee_voting_example;
+    wget https://scrutinizer-ci.com/ocular.phar;
+    php ocular.phar code-coverage:upload --format=php-clover coverage.clover;
