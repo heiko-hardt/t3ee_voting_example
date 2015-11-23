@@ -1,0 +1,35 @@
+default:
+
+    autoload:
+        '': %paths.base%/Features/Bootstrap
+
+    calls:
+        error_reporting: 32759
+
+    suites:
+
+        # Pi1: maintain plugin
+        maintain:
+            paths:
+                - %paths.base%/Features/Maintain
+            contexts:
+                - FeatureContext
+                - TYPO3MaintainContext
+
+        # Pi2: vote plugin
+        vote:
+            paths:
+                - %paths.base%/Features/Vote
+            contexts:
+                - FeatureContext
+                - TYPO3VoteContext
+
+    extensions:
+
+        Behat\MinkExtension:
+            base_url: 'http://127.0.0.1'
+            goutte: ~
+            selenium2: ~
+
+        HeikoHardt\Behat\TYPO3Extension\ServiceContainer\Typo3Extension:
+            t3_parameter: "tiny test parameter"
