@@ -23,6 +23,10 @@
     "php": ">=5.5.0",
     "typo3/cms": ">=7.6.0,<8.0"
   },
+  "require-dev": {
+    "phpunit/phpunit": "~4.8.0",
+    "mikey179/vfsStream": "1.6.0"
+  },
   "autoload": {
     "psr-4": {
       "HeikoHardt\\T3eeVotingExample\\": "Classes"
@@ -30,11 +34,22 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "HeikoHardt\\T3eeVotingExample\\Tests\\": "Tests"
+      "HeikoHardt\\T3eeVotingExample\\Tests\\": "Tests",
+      "TYPO3\\CMS\\Core\\Tests\\": "../../default.instance/typo3/sysext/core/Tests/"
     }
   },
   "replace": {
     "t3ee_voting_example": "self.version",
     "typo3-ter/t3ee-voting-example": "self.version"
+  },
+  "config": {
+    "vendor-dir": "../../default.instance/vendor",
+    "bin-dir": "../../default.instance/bin"
+  },
+  "extra": {
+    "typo3/cms": {
+      "cms-package-dir": "{$vendor-dir}/typo3/cms",
+      "web-dir": "../../default.instance"
+    }
   }
 }

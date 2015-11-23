@@ -1,0 +1,30 @@
+language: php
+
+php:
+  - 5.5
+
+env:
+  matrix:
+    - TYPO3_VERSION=7.6.0
+
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+before_script:
+  - composer require typo3/cms=$TYPO3_VERSION
+  - mkdir -p ../../default.instance/typo3conf/ext/
+  - ln -s ../../../heiko-hardt/t3ee_voting_example ../../default.instance/typo3conf/ext/t3ee_voting_example
+  - cd ../../default.instance
+  - export TYPO3_PATH_WEB=/home/travis/build/default.instance
+
+script:
+  - echo
+  - echo "Processing php unit tests"
+  - >
+    ./bin/phpunit
+    --coverage-clover=/home/travis/build/heiko-hardt/t3ee_voting_example/coverage.clover
+    --configuration typo3conf/ext/t3ee_voting_example/Build/UnitTests.travis.xml
+    typo3conf/ext/t3ee_voting_example/Tests/Unit;
