@@ -1,0 +1,22 @@
+languages:
+   JavaScript: true
+   PHP: true
+
+exclude_paths:
+ - "/Build/**/*"
+ - "/Documentation.tmpl/**/*"
+ - "/Tests/**/*"
+
+engines:
+
+  phpcodesniffer:
+    enabled: true
+    config:
+      file_extensions: "php"
+      standard: "PSR1,PSR2"
+      ignore_warnings: true
+
+ratings:
+
+  paths:
+  - "Classes/**/*.php"
