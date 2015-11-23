@@ -7,19 +7,49 @@ env:
   matrix:
     - TYPO3_VERSION=7.6.0
 
-sudo: false
+# sudo: false
 
 cache:
   directories:
     - $HOME/.composer/cache
 
+mysql:
+  database: travis_ci_behat
+  username: root
+  encoding: utf8
+
 before_script:
+  # preparing instance directories
+  - mkdir -p ../../default.instance/typo3conf/ext/
+  - mkdir -p ../../test.instance
+  # update os
+  - sudo apt-get update
+  - sudo apt-get install apache2 libapache2-mod-fastcgi
+  # enable php-fpm
+  - sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
+  - sudo a2enmod rewrite actions fastcgi alias
+  - echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm
+  # configure apache virtual hosts
+  - sudo cp -f Build/travis-ci-apache /etc/apache2/sites-available/default
+  - sudo service apache2 restart
+
+  # require composer dependencies
   - composer require typo3/cms=$TYPO3_VERSION
   - composer require codeclimate/php-test-reporter
-  - mkdir -p ../../default.instance/typo3conf/ext/
+
   - ln -s ../../../heiko-hardt/t3ee_voting_example ../../default.instance/typo3conf/ext/t3ee_voting_example
   - cd ../../default.instance
+
+  # export phpunit configuration
   - export TYPO3_PATH_WEB=/home/travis/build/default.instance
+
+  # export behat configuration
+  - export BEHAT_TYPO3_DOCROOT="/home/travis/build/test.instance"
+  - export BEHAT_TYPO3_DB_HOST="localhost"
+  - export BEHAT_TYPO3_DB_NAME="travis_ci_behat"
+  - export BEHAT_TYPO3_DB_USERNAME="root"
+  - export BEHAT_TYPO3_DB_PASSWORD=""
 
 script:
   - echo
@@ -29,6 +59,12 @@ script:
     --coverage-clover=/home/travis/build/heiko-hardt/t3ee_voting_example/build/logs/clover.xml
     --configuration typo3conf/ext/t3ee_voting_example/Build/UnitTests.travis.xml
     typo3conf/ext/t3ee_voting_example/Tests/Unit;
+
+  - echo
+  - echo "Processing acceptance tests"
+  - >
+    ./bin/behat
+    -c typo3conf/ext/t3ee_voting_example/Tests/Acceptance/behat.yml;
 
   - echo
   - echo "Commit code coverage to scrutinizer"
