@@ -11,25 +11,23 @@
  ***************************************************************/
 
 $EM_CONF[$_EXTKEY] = array(
-	'title' => 'T3EE voting example',
-	'description' => 'Example extension for using PHPUnit, Behat and Jasmine within TYPO3 context.',
-	'category' => 'example',
-	'author' => 'Heiko Hardt',
-	'author_email' => 'heiko.hardt@pixelpark.com',
-	'state' => 'test',
-	'internal' => '',
-	'uploadfolder' => '0',
-	'createDirs' => '',
-	'clearCacheOnLoad' => 0,
-	'version' => '0.0.0',
-	'constraints' => array(
-		'depends' => array(
-			'typo3' => '7.6.0-7.6.99',
-			'php' => '5.5.0-7.0.99',
-		),
-		'conflicts' => array(
-		),
-		'suggests' => array(
-		),
-	),
+    'title' => 'T3EE voting example',
+    'description' => 'Example extension for using PHPUnit, Behat and Jasmine within TYPO3 context.',
+    'category' => 'example',
+    'author' => 'Heiko Hardt',
+    'author_email' => 'heiko.hardt@pixelpark.com',
+    'state' => 'test',
+    'internal' => '',
+    'uploadfolder' => '0',
+    'createDirs' => '',
+    'clearCacheOnLoad' => 0,
+    'version' => '0.0.0',
+    'constraints' => array(
+        'depends' => array(
+            'typo3' => '7.6.0-7.6.99',
+            'php' => '5.5.0-7.0.99',
+        ),
+        'conflicts' => array(),
+        'suggests' => array(),
+    ),
 );

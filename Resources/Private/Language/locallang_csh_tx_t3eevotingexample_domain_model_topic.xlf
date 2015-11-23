@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2015-11-22T18:23:07Z" product-name="t3ee_voting_example">
-		<header/>
-		<body>
-			<trans-unit id="issue.description">
-				<source>issue</source>
-			</trans-unit>
-			<trans-unit id="yes.description">
-				<source>yes</source>
-			</trans-unit>
-			<trans-unit id="no.description">
-				<source>no</source>
-			</trans-unit>
-			<trans-unit id="attendees.description">
-				<source>attendees</source>
-			</trans-unit>
-		</body>
-	</file>
+    <file source-language="en" datatype="plaintext" original="messages" date="2015-11-22T18:23:07Z"
+          product-name="t3ee_voting_example">
+        <header/>
+        <body>
+            <trans-unit id="issue.description">
+                <source>issue</source>
+            </trans-unit>
+            <trans-unit id="yes.description">
+                <source>yes</source>
+            </trans-unit>
+            <trans-unit id="no.description">
+                <source>no</source>
+            </trans-unit>
+            <trans-unit id="attendees.description">
+                <source>attendees</source>
+            </trans-unit>
+        </body>
+    </file>
 </xliff>
