@@ -1,0 +1,40 @@
+{
+  "name": "HeikoHardt/t3ee-voting-example",
+  "type": "typo3-cms-extension",
+  "description": "Example extension for using PHPUnit, Behat and Jasmine within TYPO3 context.",
+  "authors": [
+    {
+      "name": "Heiko Hardt",
+      "role": "Developer",
+      "email": "typo3.heiko@hardt.me"
+    }
+  ],
+  "license": [
+    "GPL-3.0"
+  ],
+  "keywords": [
+    "TYPO3 CMS",
+    "bdd",
+    "behat",
+    "jasmine"
+  ],
+  "version": "0.0.0",
+  "require": {
+    "php": ">=5.5.0",
+    "typo3/cms-core": ">=7.6.0,<8.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "HeikoHardt\\T3eeVotingExample\\": "Classes"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "HeikoHardt\\T3eeVotingExample\\Tests\\": "Tests"
+    }
+  },
+  "replace": {
+    "t3ee_voting_example": "self.version",
+    "typo3-ter/t3ee-voting-example": "self.version"
+  }
+}
