@@ -44,6 +44,14 @@ before_script:
   # export phpunit configuration
   - export TYPO3_PATH_WEB=/home/travis/build/default.instance
 
+  # preparing selenium
+  - sh -e /etc/init.d/xvfb start
+  - export DISPLAY=:99.0
+  - wget http://selenium-release.storage.googleapis.com/2.48/selenium-server-standalone-2.48.2.jar
+  - wget http://chromedriver.storage.googleapis.com/2.20/chromedriver_linux32.zip && unzip chromedriver_linux32.zip && sudo mv chromedriver /usr/bin
+  - java -jar selenium-server-standalone-2.48.2.jar > /dev/null &
+  - sleep 5
+
   # export behat configuration
   - export BEHAT_TYPO3_DOCROOT="/home/travis/build/test.instance"
   - export BEHAT_TYPO3_DB_HOST="localhost"
