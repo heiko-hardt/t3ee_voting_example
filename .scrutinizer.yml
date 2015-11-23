@@ -1,9 +1,13 @@
 filter:
+
     excluded_paths:
+        - 'Build/*'
         - 'Documentation.tmpl/*'
         - 'Tests/*'
+
     paths:
         - 'Classes/*'
+
 tools:
 
     external_code_coverage:
