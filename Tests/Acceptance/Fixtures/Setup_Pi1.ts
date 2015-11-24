@@ -23,6 +23,7 @@ page {
         controller = Topic
         action = list
     }
+
     includeJSlibs.file1 = EXT:t3ee_voting_example/Resources/Public/Scripts/Vendor/jquery-1.11.3.min.js
     includeJS.file2 = EXT:t3ee_voting_example/Resources/Public/Scripts/t3ee_voting_example.min.js
 }

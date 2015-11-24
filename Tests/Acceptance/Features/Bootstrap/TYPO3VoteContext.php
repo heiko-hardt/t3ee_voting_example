@@ -46,10 +46,7 @@ class TYPO3VoteContext extends \HeikoHardt\Behat\TYPO3Extension\Context\Typo3Con
             );
 
         } catch (\Exception $e) {
-            $x = 1;
-
         }
 
     }
-
 }

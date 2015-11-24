@@ -24,9 +24,10 @@ page {
         controller = Topic
         action = list
     }
+
     includeJSFooterlibs.file1 = EXT:t3ee_voting_example/Resources/Public/Scripts/Vendor/jquery-1.11.3.min.js
     includeJSFooter.file2 = EXT:t3ee_voting_example/Resources/Public/Scripts/t3ee_voting_example.js
-    includeCSS.file1      = EXT:t3ee_voting_example/Resources/Public/Styles/t3ee_voting_example.css
+    includeCSS.file1 = EXT:t3ee_voting_example/Resources/Public/Styles/t3ee_voting_example.css
 }
 
 page.headerData.10 = TEXT

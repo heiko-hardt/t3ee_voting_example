@@ -11,7 +11,7 @@ class TYPO3MaintainContext extends \HeikoHardt\Behat\TYPO3Extension\Context\Typo
 {
 
     /** @var \HeikoHardt\T3eeVotingExample\Domain\Repository\TopicRepository */
-    protected $topicRepository = NULL;
+    protected $topicRepository = null;
 
     /** @BeforeScenario */
     public function before(BeforeScenarioScope $scope)
@@ -29,7 +29,8 @@ class TYPO3MaintainContext extends \HeikoHardt\Behat\TYPO3Extension\Context\Typo
 
             // import initial db values
             $this->setTYPO3DatasetToImport(array(
-                    getenv('TYPO3_PATH_WEB') . '/typo3/sysext/core/Tests/Functional/Fixtures/pages.xml'));
+                getenv('TYPO3_PATH_WEB') . '/typo3/sysext/core/Tests/Functional/Fixtures/pages.xml'
+            ));
 
             // setup basic frontend page
             $this->setTYPO3FrontendRootPage(
@@ -51,5 +52,4 @@ class TYPO3MaintainContext extends \HeikoHardt\Behat\TYPO3Extension\Context\Typo
         }
 
     }
-
 }
