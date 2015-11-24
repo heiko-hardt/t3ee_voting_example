@@ -86,6 +86,17 @@ class TopicControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     /**
      * @test
      */
+    public function newActionReturnNull()
+    {
+        $this->assertSame(
+            null,
+            $this->subject->newAction()
+        );
+    }
+
+    /**
+     * @test
+     */
     public function createActionAddsTheGivenTopicToTopicRepository()
     {
         $topic = new \HeikoHardt\T3eeVotingExample\Domain\Model\Topic();

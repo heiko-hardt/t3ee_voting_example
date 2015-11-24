@@ -80,6 +80,10 @@ class TopicTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function getYesReturnsInitialValueForInt()
     {
+        $this->assertSame(
+            0,
+            $this->subject->getYes()
+        );
     }
 
     /**
@@ -87,6 +91,13 @@ class TopicTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function setYesForIntSetsYes()
     {
+        $this->subject->setYes(7293);
+
+        $this->assertAttributeEquals(
+            7293,
+            'yes',
+            $this->subject
+        );
     }
 
     /**
@@ -94,6 +105,10 @@ class TopicTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function getNoReturnsInitialValueForInt()
     {
+        $this->assertSame(
+            0,
+            $this->subject->getNo()
+        );
     }
 
     /**
@@ -101,6 +116,13 @@ class TopicTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function setNoForIntSetsNo()
     {
+        $this->subject->setNo(7293);
+
+        $this->assertAttributeEquals(
+            7293,
+            'no',
+            $this->subject
+        );
     }
 
     /**
