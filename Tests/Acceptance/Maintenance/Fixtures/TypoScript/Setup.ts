@@ -27,3 +27,7 @@ page {
     includeJSlibs.file1 = EXT:t3ee_voting_example/Resources/Public/Scripts/Vendor/jquery-1.11.3.min.js
     includeJS.file2 = EXT:t3ee_voting_example/Resources/Public/Scripts/t3ee_voting_example.min.js
 }
+
+plugin.tx_t3eevotingexample_maintenance {
+    persistence.storagePid = 1
+}
