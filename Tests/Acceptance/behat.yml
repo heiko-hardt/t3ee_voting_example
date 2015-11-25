@@ -19,10 +19,9 @@ default:
     extensions:
 
         Behat\MinkExtension:
-            base_url: 'http://behat.typo3v76.t3ee.conf'
+            base_url: 'http://127.0.0.1'
             goutte: ~
-            selenium2:
-                browser: phantomjs
+            selenium2: ~
 
         HeikoHardt\Behat\TYPO3Extension\ServiceContainer\Typo3Extension:
             t3_parameter: "tiny test parameter"
