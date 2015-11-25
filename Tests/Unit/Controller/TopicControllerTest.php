@@ -1,36 +1,40 @@
 <?php
 namespace HeikoHardt\T3eeVotingExample\Tests\Unit\Controller;
 
-    /***************************************************************
-     *  Copyright notice
-     *
-     *  (c) 2015 Heiko Hardt <heiko.hardt@pixelpark.com>, Pixelpark AG
-     *
-     *  All rights reserved
-     *
-     *  This script is part of the TYPO3 project. The TYPO3 project is
-     *  free software; you can redistribute it and/or modify
-     *  it under the terms of the GNU General Public License as published by
-     *  the Free Software Foundation; either version 2 of the License, or
-     *  (at your option) any later version.
-     *
-     *  The GNU General Public License can be found at
-     *  http://www.gnu.org/copyleft/gpl.html.
-     *
-     *  This script is distributed in the hope that it will be useful,
-     *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-     *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-     *  GNU General Public License for more details.
-     *
-     *  This copyright notice MUST APPEAR in all copies of the script!
-     ***************************************************************/
+/***************************************************************
+ *  Copyright notice
+ *
+ *  (c) 2015 Heiko Hardt <heiko.hardt@pixelpark.com>, Pixelpark AG
+ *
+ *  All rights reserved
+ *
+ *  This script is part of the TYPO3 project. The TYPO3 project is
+ *  free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  The GNU General Public License can be found at
+ *  http://www.gnu.org/copyleft/gpl.html.
+ *
+ *  This script is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  This copyright notice MUST APPEAR in all copies of the script!
+ ***************************************************************/
+
+use \TYPO3\CMS\Core\Tests\UnitTestCase;
+
+use \HeikoHardt\T3eeVotingExample\Domain\Model\Topic;
 
 /**
  * Test case for class HeikoHardt\T3eeVotingExample\Controller\TopicController.
  *
  * @author Heiko Hardt <heiko.hardt@pixelpark.com>
  */
-class TopicControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+class TopicControllerTest extends UnitTestCase
 {
 
     /**
@@ -40,8 +44,13 @@ class TopicControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
     public function setUp()
     {
-        $this->subject = $this->getMock('HeikoHardt\\T3eeVotingExample\\Controller\\TopicController',
-            array('redirect', 'forward', 'addFlashMessage'), array(), '', false);
+        $this->subject = $this->getMock(
+            'HeikoHardt\\T3eeVotingExample\\Controller\\TopicController',
+            array('redirect', 'forward', 'addFlashMessage'),
+            array(),
+            '',
+            false
+        );
     }
 
     public function tearDown()
@@ -54,11 +63,22 @@ class TopicControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function listActionFetchesAllTopicsFromRepositoryAndAssignsThemToView()
     {
+        $allTopics = $this->getMock(
+            'TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
+            array(),
+            array(),
+            '',
+            false
+        );
 
-        $allTopics = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
+        $topicRepository = $this->getMock(
+            'HeikoHardt\\T3eeVotingExample\\Domain\\Repository\\TopicRepository',
+            array('findAll'),
+            array(),
+            '',
+            false
+        );
 
-        $topicRepository = $this->getMock('HeikoHardt\\T3eeVotingExample\\Domain\\Repository\\TopicRepository',
-            array('findAll'), array(), '', false);
         $topicRepository->expects($this->once())->method('findAll')->will($this->returnValue($allTopics));
         $this->inject($this->subject, 'topicRepository', $topicRepository);
 
@@ -74,7 +94,7 @@ class TopicControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function showActionAssignsTheGivenTopicToView()
     {
-        $topic = new \HeikoHardt\T3eeVotingExample\Domain\Model\Topic();
+        $topic = new Topic();
 
         $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
         $this->inject($this->subject, 'view', $view);
@@ -99,10 +119,16 @@ class TopicControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function createActionAddsTheGivenTopicToTopicRepository()
     {
-        $topic = new \HeikoHardt\T3eeVotingExample\Domain\Model\Topic();
+        $topic = new Topic();
 
-        $topicRepository = $this->getMock('HeikoHardt\\T3eeVotingExample\\Domain\\Repository\\TopicRepository',
-            array('add'), array(), '', false);
+        $topicRepository = $this->getMock(
+            'HeikoHardt\\T3eeVotingExample\\Domain\\Repository\\TopicRepository',
+            array('add'),
+            array(),
+            '',
+            false
+        );
+
         $topicRepository->expects($this->once())->method('add')->with($topic);
         $this->inject($this->subject, 'topicRepository', $topicRepository);
 
@@ -114,7 +140,7 @@ class TopicControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function editActionAssignsTheGivenTopicToView()
     {
-        $topic = new \HeikoHardt\T3eeVotingExample\Domain\Model\Topic();
+        $topic = new Topic();
 
         $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
         $this->inject($this->subject, 'view', $view);
@@ -128,10 +154,16 @@ class TopicControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function updateActionUpdatesTheGivenTopicInTopicRepository()
     {
-        $topic = new \HeikoHardt\T3eeVotingExample\Domain\Model\Topic();
+        $topic = new Topic();
 
-        $topicRepository = $this->getMock('HeikoHardt\\T3eeVotingExample\\Domain\\Repository\\TopicRepository',
-            array('update'), array(), '', false);
+        $topicRepository = $this->getMock(
+            'HeikoHardt\\T3eeVotingExample\\Domain\\Repository\\TopicRepository',
+            array('update'),
+            array(),
+            '',
+            false
+        );
+
         $topicRepository->expects($this->once())->method('update')->with($topic);
         $this->inject($this->subject, 'topicRepository', $topicRepository);
 
@@ -143,10 +175,16 @@ class TopicControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function deleteActionRemovesTheGivenTopicFromTopicRepository()
     {
-        $topic = new \HeikoHardt\T3eeVotingExample\Domain\Model\Topic();
+        $topic = new Topic();
 
-        $topicRepository = $this->getMock('HeikoHardt\\T3eeVotingExample\\Domain\\Repository\\TopicRepository',
-            array('remove'), array(), '', false);
+        $topicRepository = $this->getMock(
+            'HeikoHardt\\T3eeVotingExample\\Domain\\Repository\\TopicRepository',
+            array('remove'),
+            array(),
+            '',
+            false
+        );
+
         $topicRepository->expects($this->once())->method('remove')->with($topic);
         $this->inject($this->subject, 'topicRepository', $topicRepository);
 

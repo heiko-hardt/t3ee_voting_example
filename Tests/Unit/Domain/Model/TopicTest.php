@@ -1,29 +1,35 @@
 <?php
 namespace HeikoHardt\T3eeVotingExample\Tests\Unit\Domain\Model;
 
-    /***************************************************************
-     *  Copyright notice
-     *
-     *  (c) 2015 Heiko Hardt <heiko.hardt@pixelpark.com>, Pixelpark AG
-     *
-     *  All rights reserved
-     *
-     *  This script is part of the TYPO3 project. The TYPO3 project is
-     *  free software; you can redistribute it and/or modify
-     *  it under the terms of the GNU General Public License as published by
-     *  the Free Software Foundation; either version 2 of the License, or
-     *  (at your option) any later version.
-     *
-     *  The GNU General Public License can be found at
-     *  http://www.gnu.org/copyleft/gpl.html.
-     *
-     *  This script is distributed in the hope that it will be useful,
-     *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-     *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-     *  GNU General Public License for more details.
-     *
-     *  This copyright notice MUST APPEAR in all copies of the script!
-     ***************************************************************/
+/***************************************************************
+ *  Copyright notice
+ *
+ *  (c) 2015 Heiko Hardt <heiko.hardt@pixelpark.com>, Pixelpark AG
+ *
+ *  All rights reserved
+ *
+ *  This script is part of the TYPO3 project. The TYPO3 project is
+ *  free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  The GNU General Public License can be found at
+ *  http://www.gnu.org/copyleft/gpl.html.
+ *
+ *  This script is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  This copyright notice MUST APPEAR in all copies of the script!
+ ***************************************************************/
+
+use \TYPO3\CMS\Core\Tests\UnitTestCase;
+use \TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+
+use \HeikoHardt\T3eeVotingExample\Domain\Model\Topic;
+use \HeikoHardt\T3eeVotingExample\Domain\Model\Attendee;
 
 /**
  * Test case for class \HeikoHardt\T3eeVotingExample\Domain\Model\Topic.
@@ -33,7 +39,7 @@ namespace HeikoHardt\T3eeVotingExample\Tests\Unit\Domain\Model;
  *
  * @author Heiko Hardt <heiko.hardt@pixelpark.com>
  */
-class TopicTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+class TopicTest extends UnitTestCase
 {
     /**
      * @var \HeikoHardt\T3eeVotingExample\Domain\Model\Topic
@@ -42,7 +48,7 @@ class TopicTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
     public function setUp()
     {
-        $this->subject = new \HeikoHardt\T3eeVotingExample\Domain\Model\Topic();
+        $this->subject = new Topic();
     }
 
     public function tearDown()
@@ -130,7 +136,8 @@ class TopicTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function getAttendeesReturnsInitialValueForAttendee()
     {
-        $newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $newObjectStorage = new ObjectStorage();
+
         $this->assertEquals(
             $newObjectStorage,
             $this->subject->getAttendees()
@@ -142,13 +149,15 @@ class TopicTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function setAttendeesForObjectStorageContainingAttendeeSetsAttendees()
     {
-        $attendee = new \HeikoHardt\T3eeVotingExample\Domain\Model\Attendee();
-        $objectStorageHoldingExactlyOneAttendees = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $objectStorageHoldingExactlyOneAttendees->attach($attendee);
-        $this->subject->setAttendees($objectStorageHoldingExactlyOneAttendees);
+        $attendee = new Attendee();
+
+        $objectStorage = new ObjectStorage();
+        $objectStorage->attach($attendee);
+
+        $this->subject->setAttendees($objectStorage);
 
         $this->assertAttributeEquals(
-            $objectStorageHoldingExactlyOneAttendees,
+            $objectStorage,
             'attendees',
             $this->subject
         );
@@ -159,11 +168,19 @@ class TopicTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function addAttendeeToObjectStorageHoldingAttendees()
     {
-        $attendee = new \HeikoHardt\T3eeVotingExample\Domain\Model\Attendee();
-        $attendeesObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('attach'),
-            array(), '', false);
-        $attendeesObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($attendee));
-        $this->inject($this->subject, 'attendees', $attendeesObjectStorageMock);
+        $attendee = new Attendee();
+
+        $attendees = $this->getMock(
+            'TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
+            array('attach'),
+            array(),
+            '',
+            false
+        );
+
+        $attendees->expects($this->once())->method('attach')->with($this->equalTo($attendee));
+
+        $this->inject($this->subject, 'attendees', $attendees);
 
         $this->subject->addAttendee($attendee);
     }
@@ -173,13 +190,20 @@ class TopicTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function removeAttendeeFromObjectStorageHoldingAttendees()
     {
-        $attendee = new \HeikoHardt\T3eeVotingExample\Domain\Model\Attendee();
-        $attendeesObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('detach'),
-            array(), '', false);
-        $attendeesObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($attendee));
-        $this->inject($this->subject, 'attendees', $attendeesObjectStorageMock);
+        $attendee = new Attendee();
+
+        $attendees = $this->getMock(
+            'TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
+            array('detach'),
+            array(),
+            '',
+            false
+        );
+
+        $attendees->expects($this->once())->method('detach')->with($this->equalTo($attendee));
+
+        $this->inject($this->subject, 'attendees', $attendees);
 
         $this->subject->removeAttendee($attendee);
-
     }
 }
