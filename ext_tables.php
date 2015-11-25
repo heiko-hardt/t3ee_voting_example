@@ -5,14 +5,14 @@ if (!defined('TYPO3_MODE')) {
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
     'HeikoHardt.' . $_EXTKEY,
-    'Pi1',
-    'Maintainance'
+    'Maintenance',
+    'Voting-Example: Maintenance'
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
     'HeikoHardt.' . $_EXTKEY,
-    'Pi2',
-    'Voting'
+    'Voting',
+    'Voting-Example: Voting'
 );
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(

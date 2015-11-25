@@ -1,30 +1,30 @@
 
-plugin.tx_t3eevotingexample_pi1 {
+plugin.tx_t3eevotingexample_maintenance {
 	view {
-		# cat=plugin.tx_t3eevotingexample_pi1/file; type=string; label=Path to template root (FE)
+		# cat=plugin.tx_t3eevotingexample_maintenance/file; type=string; label=Path to template root (FE)
 		templateRootPath = EXT:t3ee_voting_example/Resources/Private/Templates/
-		# cat=plugin.tx_t3eevotingexample_pi1/file; type=string; label=Path to template partials (FE)
+		# cat=plugin.tx_t3eevotingexample_maintenance/file; type=string; label=Path to template partials (FE)
 		partialRootPath = EXT:t3ee_voting_example/Resources/Private/Partials/
-		# cat=plugin.tx_t3eevotingexample_pi1/file; type=string; label=Path to template layouts (FE)
+		# cat=plugin.tx_t3eevotingexample_maintenance/file; type=string; label=Path to template layouts (FE)
 		layoutRootPath = EXT:t3ee_voting_example/Resources/Private/Layouts/
 	}
 	persistence {
-		# cat=plugin.tx_t3eevotingexample_pi1//a; type=string; label=Default storage PID
+		# cat=plugin.tx_t3eevotingexample_maintenance//a; type=string; label=Default storage PID
 		storagePid =
 	}
 }
 
-plugin.tx_t3eevotingexample_pi2 {
+plugin.tx_t3eevotingexample_voting {
 	view {
-		# cat=plugin.tx_t3eevotingexample_pi2/file; type=string; label=Path to template root (FE)
+		# cat=plugin.tx_t3eevotingexample_voting/file; type=string; label=Path to template root (FE)
 		templateRootPath = EXT:t3ee_voting_example/Resources/Private/Templates/
-		# cat=plugin.tx_t3eevotingexample_pi2/file; type=string; label=Path to template partials (FE)
+		# cat=plugin.tx_t3eevotingexample_voting/file; type=string; label=Path to template partials (FE)
 		partialRootPath = EXT:t3ee_voting_example/Resources/Private/Partials/
-		# cat=plugin.tx_t3eevotingexample_pi2/file; type=string; label=Path to template layouts (FE)
+		# cat=plugin.tx_t3eevotingexample_voting/file; type=string; label=Path to template layouts (FE)
 		layoutRootPath = EXT:t3ee_voting_example/Resources/Private/Layouts/
 	}
 	persistence {
-		# cat=plugin.tx_t3eevotingexample_pi2//a; type=string; label=Default storage PID
+		# cat=plugin.tx_t3eevotingexample_voting//a; type=string; label=Default storage PID
 		storagePid =
 	}
 }

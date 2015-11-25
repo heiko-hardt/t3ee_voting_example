@@ -5,7 +5,7 @@ if (!defined('TYPO3_MODE')) {
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
     'HeikoHardt.' . $_EXTKEY,
-    'Pi1',
+    'Maintenance',
     array(
         'Topic' => 'list, show, new, create, edit, update, delete',
 
@@ -19,7 +19,7 @@ if (!defined('TYPO3_MODE')) {
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
     'HeikoHardt.' . $_EXTKEY,
-    'Pi2',
+    'Voting',
     array(
         'Topic' => 'list, show, new, create, edit, update, delete',
 

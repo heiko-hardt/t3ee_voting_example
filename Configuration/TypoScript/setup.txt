@@ -1,23 +1,23 @@
 
-plugin.tx_t3eevotingexample_pi1 {
+plugin.tx_t3eevotingexample_maintenance {
 	view {
-		templateRootPaths.0 = {$plugin.tx_t3eevotingexample_pi1.view.templateRootPath}
-		partialRootPaths.0 = {$plugin.tx_t3eevotingexample_pi1.view.partialRootPath}
-		layoutRootPaths.0 = {$plugin.tx_t3eevotingexample_pi1.view.layoutRootPath}
+		templateRootPaths.0 = {$plugin.tx_t3eevotingexample_maintenance.view.templateRootPath}
+		partialRootPaths.0 = {$plugin.tx_t3eevotingexample_maintenance.view.partialRootPath}
+		layoutRootPaths.0 = {$plugin.tx_t3eevotingexample_maintenance.view.layoutRootPath}
 	}
 	persistence {
-		storagePid = {$plugin.tx_t3eevotingexample_pi1.persistence.storagePid}
+		storagePid = {$plugin.tx_t3eevotingexample_maintenance.persistence.storagePid}
 	}
 }
 
-plugin.tx_t3eevotingexample_pi2 {
+plugin.tx_t3eevotingexample_voting {
 	view {
-		templateRootPaths.0 = {$plugin.tx_t3eevotingexample_pi2.view.templateRootPath}
-		partialRootPaths.0 = {$plugin.tx_t3eevotingexample_pi2.view.partialRootPath}
-		layoutRootPaths.0 = {$plugin.tx_t3eevotingexample_pi2.view.layoutRootPath}
+		templateRootPaths.0 = {$plugin.tx_t3eevotingexample_voting.view.templateRootPath}
+		partialRootPaths.0 = {$plugin.tx_t3eevotingexample_voting.view.partialRootPath}
+		layoutRootPaths.0 = {$plugin.tx_t3eevotingexample_voting.view.layoutRootPath}
 	}
 	persistence {
-		storagePid = {$plugin.tx_t3eevotingexample_pi2.persistence.storagePid}
+		storagePid = {$plugin.tx_t3eevotingexample_voting.persistence.storagePid}
 	}
 }
 

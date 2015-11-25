@@ -176,8 +176,8 @@
                     "noncacheableActions": "",
                     "switchableActions": ""
                 },
-                "key": "pi1",
-                "name": "Maintainance"
+                "key": "maintenance",
+                "name": "Maintenance"
             },
             {
                 "actions": {
@@ -185,7 +185,7 @@
                     "noncacheableActions": "",
                     "switchableActions": ""
                 },
-                "key": "pi2",
+                "key": "voting",
                 "name": "Voting"
             }
         ],
