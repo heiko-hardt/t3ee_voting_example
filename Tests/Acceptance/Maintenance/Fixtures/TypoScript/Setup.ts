@@ -18,7 +18,7 @@ page {
     10 {
         userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
         extensionName = T3eeVotingExample
-        pluginName = Pi1
+        pluginName = Maintenance
         vendorName = HeikoHardt
         controller = Topic
         action = list

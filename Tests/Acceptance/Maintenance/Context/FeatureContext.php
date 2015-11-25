@@ -1,4 +1,5 @@
 <?php
+namespace Maintenance\Context;
 
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\Context;
@@ -11,12 +12,14 @@ use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use HeikoHardt\Behat\TYPO3Extension\Context\Typo3Context;
 use Behat\MinkExtension\Context\MinkContext;
 
+$x = 1;
+
 class FeatureContext extends MinkContext implements Context, SnippetAcceptingContext
 {
 
     public function __construct()
     {
-
+        $x = 1;
     }
 
     /**

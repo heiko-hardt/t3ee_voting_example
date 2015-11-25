@@ -1,4 +1,5 @@
 <?php
+namespace Maintenance\Context;
 
 use Behat\Behat\Context\Context;
 use Behat\Testwork\Tester\Exception\TesterException;
@@ -7,7 +8,7 @@ use Behat\Testwork\Exception\Cli;
 
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 
-class TYPO3MaintainContext extends \HeikoHardt\Behat\TYPO3Extension\Context\Typo3Context implements Context
+class TYPO3Context extends \HeikoHardt\Behat\TYPO3Extension\Context\Typo3Context implements Context
 {
 
     /** @var \HeikoHardt\T3eeVotingExample\Domain\Repository\TopicRepository */
@@ -35,7 +36,7 @@ class TYPO3MaintainContext extends \HeikoHardt\Behat\TYPO3Extension\Context\Typo
             // setup basic frontend page
             $this->setTYPO3FrontendRootPage(
                 1,
-                array('typo3conf/ext/t3ee_voting_example/Tests/Acceptance/Fixtures/Setup_Pi1.ts')
+                array('typo3conf/ext/t3ee_voting_example/Tests/Acceptance/Maintenance/Fixtures/TypoScript/Setup.ts')
             );
 
             // boot typo3
