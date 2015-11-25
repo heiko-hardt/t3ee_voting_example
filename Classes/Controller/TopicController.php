@@ -81,7 +81,7 @@ class TopicController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     public function createAction(\HeikoHardt\T3eeVotingExample\Domain\Model\Topic $newTopic)
     {
         $this->addFlashMessage(
-            'The object was created.
+            'The topic was created.
              Please be aware that this action is publicly accessible unless you implement an access check.
              See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain',
             '',
@@ -112,7 +112,7 @@ class TopicController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     public function updateAction(\HeikoHardt\T3eeVotingExample\Domain\Model\Topic $topic)
     {
         $this->addFlashMessage(
-            'The object was updated.
+            'The topic was updated.
              Please be aware that this action is publicly accessible unless you implement an access check.
              See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain',
             '',
@@ -131,7 +131,7 @@ class TopicController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     public function deleteAction(\HeikoHardt\T3eeVotingExample\Domain\Model\Topic $topic)
     {
         $this->addFlashMessage(
-            'The object was deleted.
+            'The topic was deleted.
              Please be aware that this action is publicly accessible unless you implement an access check.
              See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain',
             '',
