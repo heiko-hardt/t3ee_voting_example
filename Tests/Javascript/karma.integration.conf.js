@@ -20,7 +20,7 @@ module.exports = function (config) {
             'Vendor/jasmine-jquery.js',
 
             '../../Resources/Public/Scripts/t3ee_voting_example.js',
-            'Scripts/*.spec.js'
+            'Specs/Integration/*.spec.js'
         ],
 
 

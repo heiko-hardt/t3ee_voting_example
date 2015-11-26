@@ -81,6 +81,12 @@ script:
     -c typo3conf/ext/t3ee_voting_example/Tests/Acceptance/behat.yml;
 
   - echo
+  - echo "Processing javascript unit tests"
+  - >
+    cd ../heiko-hardt/t3ee_voting_example/Tests/Javascript;
+    ./node_modules/.bin/karma start karma.unit.conf.js --single-run --browsers PhantomJS;
+
+  - echo
   - echo "Commit code coverage to scrutinizer"
   - >
     cd /home/travis/build/heiko-hardt/t3ee_voting_example;
@@ -93,3 +99,6 @@ script:
     cd /home/travis/build/heiko-hardt/t3ee_voting_example;
     CODECLIMATE_REPO_TOKEN=47b2af3d4e98207ec94893d047cb4c9415902a03b9a7c487c9e654ff42613738
     /home/travis/build/default.instance/bin/test-reporter;
+
+  - echo "Show current environment variables"
+  - env

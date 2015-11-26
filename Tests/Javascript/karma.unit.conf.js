@@ -15,12 +15,8 @@ module.exports = function (config) {
 
         // list of files / patterns to load in the browser
         files: [
-            'Fixtures/*.html',
-            'Vendor/jquery-1.11.3.min.js',
-            'Vendor/jasmine-jquery.js',
-
             '../../Resources/Public/Scripts/t3ee_voting_example.js',
-            'Scripts/*.spec.js'
+            'Specs/Unit/*.spec.js'
         ],
 
 
