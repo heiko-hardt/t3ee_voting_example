@@ -1,0 +1,34 @@
+<f:layout name="Default"/>
+
+<f:section name="main">
+
+    <h1>Listing for Topic</h1>
+
+    <f:flashMessages/>
+
+    <table class="tx_t3eevotingexample">
+
+        <tr>
+            <th><f:translate key="tx_t3eevotingexample_domain_model_topic.issue"/></th>
+            <th><f:translate key="tx_t3eevotingexample_domain_model_topic.yes"/></th>
+            <th><f:translate key="tx_t3eevotingexample_domain_model_topic.no"/></th>
+            <th><f:translate key="tx_t3eevotingexample_domain_model_topic.votes"/></th>
+            <th colspan="2"></th>
+        </tr>
+
+        <f:for each="{topics}" as="topic">
+            <tr>
+                <td><f:link.action action="show" arguments="{topic : topic}"> {topic.issue}</f:link.action></td>
+                <td><f:link.action action="show" arguments="{topic : topic}"> {topic.yes}</f:link.action></td>
+                <td><f:link.action action="show" arguments="{topic : topic}"> {topic.no}</f:link.action></td>
+                <td><f:link.action action="show" arguments="{topic : topic}"> <f:count subject="{topic.attendees}" /></f:link.action></td>
+                <td><f:link.action action="edit" arguments="{topic : topic}">Edit</f:link.action></td>
+                <td><f:link.action action="delete" arguments="{topic : topic}">Delete</f:link.action></td>
+            </tr>
+        </f:for>
+
+    </table>
+
+    <f:link.action action="new">New Topic</f:link.action>
+
+</f:section>

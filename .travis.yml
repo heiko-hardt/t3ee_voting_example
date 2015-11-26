@@ -1,0 +1,89 @@
+language: php
+
+php:
+  - 5.5
+
+env:
+  matrix:
+    - TYPO3_VERSION=7.6.0
+
+# sudo: false
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+mysql:
+  database: travis_ci_behat
+  username: root
+  encoding: utf8
+
+before_script:
+  # preparing instance directories
+  - mkdir -p ../../default.instance/typo3conf/ext/
+  - mkdir -p ../../test.instance
+  # update os
+  - sudo apt-get update
+  - sudo apt-get install apache2 libapache2-mod-fastcgi
+  # enable php-fpm
+  - sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
+  - sudo a2enmod rewrite actions fastcgi alias
+  - echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm
+  # configure apache virtual hosts
+  - sudo cp -f Build/travis-ci-apache /etc/apache2/sites-available/default
+  - sudo service apache2 restart
+
+  # require composer dependencies
+  - composer require typo3/cms=$TYPO3_VERSION
+  - composer require codeclimate/php-test-reporter
+
+  - ln -s ../../../heiko-hardt/t3ee_voting_example ../../default.instance/typo3conf/ext/t3ee_voting_example
+  - cd ../../default.instance
+
+  # export phpunit configuration
+  - export TYPO3_PATH_WEB=/home/travis/build/default.instance
+
+  # preparing selenium
+  - sh -e /etc/init.d/xvfb start
+  - export DISPLAY=:99.0
+  - wget http://selenium-release.storage.googleapis.com/2.48/selenium-server-standalone-2.48.2.jar
+  - wget http://chromedriver.storage.googleapis.com/2.20/chromedriver_linux32.zip && unzip chromedriver_linux32.zip && sudo mv chromedriver /usr/bin
+  - java -jar selenium-server-standalone-2.48.2.jar > /dev/null &
+  - sleep 5
+
+  # export behat configuration
+  - export BEHAT_TYPO3_DOCROOT="/home/travis/build/test.instance"
+  - export BEHAT_TYPO3_DB_HOST="localhost"
+  - export BEHAT_TYPO3_DB_NAME="travis_ci_behat"
+  - export BEHAT_TYPO3_DB_USERNAME="root"
+  - export BEHAT_TYPO3_DB_PASSWORD=""
+
+script:
+  - echo
+  - echo "Processing php unit tests"
+  - >
+    ./bin/phpunit
+    --coverage-clover=/home/travis/build/heiko-hardt/t3ee_voting_example/build/logs/clover.xml
+    --configuration typo3conf/ext/t3ee_voting_example/Build/UnitTests.travis.xml
+    typo3conf/ext/t3ee_voting_example/Tests/Unit;
+
+  - echo
+  - echo "Processing acceptance tests"
+  - >
+    ./bin/behat
+    -c typo3conf/ext/t3ee_voting_example/Tests/Acceptance/behat.yml;
+
+  - echo
+  - echo "Commit code coverage to scrutinizer"
+  - >
+    cd /home/travis/build/heiko-hardt/t3ee_voting_example;
+    wget https://scrutinizer-ci.com/ocular.phar;
+    php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml;
+
+  - echo
+  - echo "Commit code coverage to codeclimate"
+  - >
+    cd /home/travis/build/heiko-hardt/t3ee_voting_example;
+    CODECLIMATE_REPO_TOKEN=47b2af3d4e98207ec94893d047cb4c9415902a03b9a7c487c9e654ff42613738
+    /home/travis/build/default.instance/bin/test-reporter;

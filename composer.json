@@ -1,0 +1,61 @@
+{
+  "name": "HeikoHardt/t3ee-voting-example",
+  "type": "typo3-cms-extension",
+  "description": "Example extension for using PHPUnit, Behat and Jasmine within TYPO3 context.",
+  "authors": [
+    {
+      "name": "Heiko Hardt",
+      "role": "Developer",
+      "email": "typo3.heiko@hardt.me"
+    }
+  ],
+  "license": [
+    "GPL-3.0"
+  ],
+  "keywords": [
+    "TYPO3 CMS",
+    "bdd",
+    "behat",
+    "jasmine"
+  ],
+  "version": "0.0.1",
+  "require": {
+    "php": ">=5.5.0",
+    "typo3/cms": ">=7.6.0,<8.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.8.0",
+    "mikey179/vfsStream": "1.6.0",
+    "behat/behat": "^3.0",
+    "behat/mink": "^1.7",
+    "behat/mink-extension": "^2.1",
+    "behat/mink-goutte-driver": "^1.2",
+    "behat/mink-selenium2-driver": "^1.3",
+    "heikohardt/behat-typo3-extension": "^1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "HeikoHardt\\T3eeVotingExample\\": "Classes"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "HeikoHardt\\T3eeVotingExample\\Tests\\": "Tests",
+      "TYPO3\\CMS\\Core\\Tests\\": "../../default.instance/typo3/sysext/core/Tests/"
+    }
+  },
+  "replace": {
+    "t3ee_voting_example": "self.version",
+    "typo3-ter/t3ee-voting-example": "self.version"
+  },
+  "config": {
+    "vendor-dir": "../../default.instance/vendor",
+    "bin-dir": "../../default.instance/bin"
+  },
+  "extra": {
+    "typo3/cms": {
+      "cms-package-dir": "{$vendor-dir}/typo3/cms",
+      "web-dir": "../../default.instance"
+    }
+  }
+}

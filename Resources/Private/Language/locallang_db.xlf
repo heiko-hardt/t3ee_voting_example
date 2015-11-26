@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2015-11-22T18:23:07Z"
+          product-name="t3ee_voting_example">
+        <header/>
+        <body>
+            <trans-unit id="tx_t3eevotingexample_domain_model_topic">
+                <source>Topic</source>
+            </trans-unit>
+            <trans-unit id="tx_t3eevotingexample_domain_model_topic.issue">
+                <source>Issue</source>
+            </trans-unit>
+            <trans-unit id="tx_t3eevotingexample_domain_model_topic.yes">
+                <source>Yes</source>
+            </trans-unit>
+            <trans-unit id="tx_t3eevotingexample_domain_model_topic.no">
+                <source>No</source>
+            </trans-unit>
+            <trans-unit id="tx_t3eevotingexample_domain_model_topic.attendees">
+                <source>Attendees</source>
+            </trans-unit>
+            <trans-unit id="tx_t3eevotingexample_domain_model_attendee">
+                <source>Attendee</source>
+            </trans-unit>
+            <trans-unit id="tx_t3eevotingexample_domain_model_attendee.name">
+                <source>Name</source>
+            </trans-unit>
+            <trans-unit id="tx_t3eevotingexample_domain_model_attendee.email">
+                <source>Email</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

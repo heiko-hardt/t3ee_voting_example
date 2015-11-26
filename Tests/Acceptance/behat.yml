@@ -1,0 +1,27 @@
+default:
+
+    autoload:
+        '': %paths.base%
+
+    calls:
+        error_reporting: 32759
+
+    suites:
+
+        # Maintenance plugin
+        maintain:
+            paths:
+                - %paths.base%/Maintenance/Features
+            contexts:
+                - Maintenance\Context\FeatureContext
+                - Maintenance\Context\TYPO3Context
+
+    extensions:
+
+        Behat\MinkExtension:
+            base_url: 'http://127.0.0.1'
+            goutte: ~
+            selenium2: ~
+
+        HeikoHardt\Behat\TYPO3Extension\ServiceContainer\Typo3Extension:
+            t3_parameter: "tiny test parameter"

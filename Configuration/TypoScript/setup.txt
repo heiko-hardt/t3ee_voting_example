@@ -1,0 +1,56 @@
+
+plugin.tx_t3eevotingexample_maintenance {
+	view {
+		templateRootPaths.0 = {$plugin.tx_t3eevotingexample_maintenance.view.templateRootPath}
+		partialRootPaths.0 = {$plugin.tx_t3eevotingexample_maintenance.view.partialRootPath}
+		layoutRootPaths.0 = {$plugin.tx_t3eevotingexample_maintenance.view.layoutRootPath}
+	}
+	persistence {
+		storagePid = {$plugin.tx_t3eevotingexample_maintenance.persistence.storagePid}
+	}
+}
+
+plugin.tx_t3eevotingexample_voting {
+	view {
+		templateRootPaths.0 = {$plugin.tx_t3eevotingexample_voting.view.templateRootPath}
+		partialRootPaths.0 = {$plugin.tx_t3eevotingexample_voting.view.partialRootPath}
+		layoutRootPaths.0 = {$plugin.tx_t3eevotingexample_voting.view.layoutRootPath}
+	}
+	persistence {
+		storagePid = {$plugin.tx_t3eevotingexample_voting.persistence.storagePid}
+	}
+}
+
+plugin.tx_t3eevotingexample._CSS_DEFAULT_STYLE (
+	textarea.f3-form-error {
+		background-color:#FF9F9F;
+		border: 1px #FF0000 solid;
+	}
+
+	input.f3-form-error {
+		background-color:#FF9F9F;
+		border: 1px #FF0000 solid;
+	}
+
+	.tx-t3ee-voting-example table {
+		border-collapse:separate;
+		border-spacing:10px;
+	}
+
+	.tx-t3ee-voting-example table th {
+		font-weight:bold;
+	}
+
+	.tx-t3ee-voting-example table td {
+		vertical-align:top;
+	}
+
+	.typo3-messages .message-error {
+		color:red;
+	}
+
+	.typo3-messages .message-ok {
+		color:green;
+	}
+
+)

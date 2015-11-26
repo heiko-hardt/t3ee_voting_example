@@ -1,0 +1,19 @@
+<f:layout name="Default"/>
+
+<f:section name="main">
+
+    <h1>New Topic</h1>
+
+    <f:flashMessages/>
+
+    <f:render partial="FormErrors" arguments="{object:Topic}"/>
+
+    <f:form action="create" name="newTopic" object="{newTopic}">
+
+        <f:render partial="Topic/FormFields"/>
+
+        <f:form.submit value="Create new"/>
+
+    </f:form>
+
+</f:section>
