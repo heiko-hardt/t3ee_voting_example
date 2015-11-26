@@ -25,6 +25,7 @@ before_script:
   # update os
   - sudo apt-get update
   - sudo apt-get install apache2 libapache2-mod-fastcgi
+  - sudo apt-get install nodejs
   # enable php-fpm
   - sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
   - sudo a2enmod rewrite actions fastcgi alias
@@ -51,6 +52,11 @@ before_script:
   - wget http://chromedriver.storage.googleapis.com/2.20/chromedriver_linux32.zip && unzip chromedriver_linux32.zip && sudo mv chromedriver /usr/bin
   - java -jar selenium-server-standalone-2.48.2.jar > /dev/null &
   - sleep 5
+
+  # preparing karma
+  - cd ../heiko-hardt/t3ee_voting_example/Tests/Javascript
+  - npm install
+  - cd /home/travis/build/default.instance
 
   # export behat configuration
   - export BEHAT_TYPO3_DOCROOT="/home/travis/build/test.instance"

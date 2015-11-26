@@ -1,0 +1,23 @@
+{
+  "name": "step01",
+  "version": "1.0.0",
+  "description": "bla",
+  "dependencies": {
+    "karma": "^0.13.15"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-uglify": "^0.10.0",
+    "jasmine-core": "^2.3.4",
+    "karma-chrome-launcher": "^0.2.1",
+    "karma-coverage": "^0.5.3",
+    "karma-firefox-launcher": "^0.1.6",
+    "karma-jasmine": "^0.3.6",
+    "karma-phantomjs-launcher": "^0.2.1",
+    "karma-safari-launcher": "^0.1.1",
+    "phantomjs": "^1.9.18"
+  },
+  "author": "",
+  "license": "MIT"
+}
