@@ -16,6 +16,9 @@
             <trans-unit id="tx_t3eevotingexample_domain_model_topic.no">
                 <source>No</source>
             </trans-unit>
+            <trans-unit id="tx_t3eevotingexample_domain_model_topic.votes">
+                <source>Votes</source>
+            </trans-unit>
             <trans-unit id="tx_t3eevotingexample_domain_model_topic.attendees">
                 <source>Attendees</source>
             </trans-unit>
