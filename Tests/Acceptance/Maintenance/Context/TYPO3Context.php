@@ -55,24 +55,48 @@ class TYPO3Context extends \HeikoHardt\Behat\TYPO3Extension\Context\Typo3Context
     }
 
     /**
-     * @Given there are :count votes
+     * @Given there are :count topics
      */
-    public function thereAreVotes($count)
+    public function thereAreTopics($count)
     {
         for ($i = 0; $i < $count; $i++) {
             $attendee = new Attendee();
-            $attendee->setName('Example Name ' . ($i+1));
+            $attendee->setName('Example Name ' . ($i + 1));
             $attendee->setEmail('example@domain.com');
             $attendee->setPid(1);
 
             $topic = new Topic();
-            $topic->setIssue('Do you think it may ' . ($i+1) . '...');
+            $topic->setIssue('Do you think it may ' . ($i + 1) . '...');
             $topic->setPid(1);
             $topic->addAttendee($attendee);
 
             $this->topicRepository->add($topic);
 
         }
+        $this->typo3PersistenceManager->persistAll();
+    }
+
+    /**
+     * @Given there is a topic labeled :topicLabel having :attendeeCount votes
+     */
+    public function thereIsATopicLabeledHavingVotes($topicLabel, $attendeeCount)
+    {
+        $topic = new Topic();
+        $topic->setIssue($topicLabel);
+        $topic->setPid(1);
+
+        for ($i = 0; $i < $attendeeCount; $i++) {
+            $attendee = new Attendee();
+            $attendee->setName('Example Name ' . ($i + 1));
+            $attendee->setEmail('example' . ($i + 1) . '@domain.com');
+            $attendee->setPid(1);
+            $topic->addAttendee($attendee);
+        }
+
+        // add topic
+        $this->topicRepository->add($topic);
+
+        // persist topic
         $this->typo3PersistenceManager->persistAll();
     }
 }

@@ -1,26 +1,38 @@
 <table class="tx-t3ee-voting-example">
+
     <tr>
-        <td>
-            <f:translate key="tx_t3eevotingexample_domain_model_topic.issue"/>
-        </td>
-        <td>
-            {topic.issue}
-        </td>
+        <td><f:translate key="tx_t3eevotingexample_domain_model_topic.issue"/></td>
+        <td>{topic.issue}</td>
     </tr>
+
     <tr>
-        <td>
-            <f:translate key="tx_t3eevotingexample_domain_model_topic.yes"/>
-        </td>
-        <td>
-            {topic.yes}
-        </td>
+        <td><f:translate key="tx_t3eevotingexample_domain_model_topic.yes"/></td>
+        <td>{topic.yes}</td>
     </tr>
+
     <tr>
-        <td>
-            <f:translate key="tx_t3eevotingexample_domain_model_topic.no"/>
-        </td>
-        <td>
-            {topic.no}
-        </td>
+        <td><f:translate key="tx_t3eevotingexample_domain_model_topic.no"/></td>
+        <td>{topic.no}</td>
     </tr>
+
+    <f:if condition="{topic.attendees}">
+
+        <tr>
+            <td>Attendees</td>
+            <td>
+
+                <table class="attendees">
+                    <f:for each="{topic.attendees}" as="attendee">
+                        <tr>
+                            <td>{attendee.name}</td>
+                            <td>{attendee.email}</td>
+                        </tr>
+                    </f:for>
+                </table>
+
+            </td>
+        </tr>
+
+    </f:if>
+
 </table>

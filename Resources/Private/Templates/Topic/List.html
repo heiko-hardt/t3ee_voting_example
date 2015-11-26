@@ -12,6 +12,7 @@
             <th><f:translate key="tx_t3eevotingexample_domain_model_topic.issue"/></th>
             <th><f:translate key="tx_t3eevotingexample_domain_model_topic.yes"/></th>
             <th><f:translate key="tx_t3eevotingexample_domain_model_topic.no"/></th>
+            <th><f:translate key="tx_t3eevotingexample_domain_model_topic.votes"/></th>
             <th colspan="2"></th>
         </tr>
 
@@ -20,6 +21,7 @@
                 <td><f:link.action action="show" arguments="{topic : topic}"> {topic.issue}</f:link.action></td>
                 <td><f:link.action action="show" arguments="{topic : topic}"> {topic.yes}</f:link.action></td>
                 <td><f:link.action action="show" arguments="{topic : topic}"> {topic.no}</f:link.action></td>
+                <td><f:link.action action="show" arguments="{topic : topic}"> <f:count subject="{topic.attendees}" /></f:link.action></td>
                 <td><f:link.action action="edit" arguments="{topic : topic}">Edit</f:link.action></td>
                 <td><f:link.action action="delete" arguments="{topic : topic}">Delete</f:link.action></td>
             </tr>

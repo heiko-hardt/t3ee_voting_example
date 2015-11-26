@@ -19,65 +19,107 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
     }
 
     /**
-     * @Then I should see :count votes
-     */
-    public function iShouldSeeVotes($count)
-    {
-
-        $table = $this->getSession()->getPage()->find('css', 'table.tx_t3eevotingexample');
-
-        if (is_null($table)) {
-            throw new \Exception('Table couldn\'t be found!');
-        }
-
-        $trs = $table->findAll('css', 'table.tx_t3eevotingexample tr');
-
-        if (count($trs) - 1 <> $count) {
-            throw new \Exception('There are ' . count($trs) - 1 . ' vote(s) found!');
-        }
-
-    }
-
-    /**
      * @Then I should see the headline :headline
      */
     public function iShouldSeeTheHeadline($headline)
     {
-        $page = $this->getSession()->getPage()->findAll('css', 'h1');
-        if (count($page) > 0) {
-            foreach ($page as $node) {
+        $extensionNode = $this->getSession()
+            ->getPage()
+            ->find('css', '.tx-t3ee-voting-example');
+
+        $headlineNodes = $extensionNode->findAll('css', 'h1');
+
+        if (count($headlineNodes) > 0) {
+            foreach ($headlineNodes as $node) {
                 if (preg_match('/' . $headline . '/i', $node->getText())) {
                     return true;
                 }
             }
         }
 
-        throw new \Exception('The Headline "' . $headline . '" couldn\'t be found');
+        throw new \Exception('The headline "' . $headline . '" couldn\'t be found');
     }
 
     /**
-     * @When I wait
+     * @Then I should see :count topics
      */
-    public function iWait()
+    public function iShouldSeeTopics($count)
     {
+        $extensionNode = $this->getSession()
+            ->getPage()
+            ->find('css', '.tx-t3ee-voting-example');
 
-        // max time to wait
-        $time = 2000; // time should be in milliseconds
+        $trNodes = $extensionNode->findAll('css', 'table.tx_t3eevotingexample tr');
 
-        // $this->getSession()->wait($time, '(0 === Ajax.activeRequestCount)');
-        // $this->getSession()->wait($time, '(0 === jQuery.active)');
-        $this->getSession()->wait($time);
-
+        if (count($trNodes) - 1 <> $count) {
+            throw new \Exception('There are ' . count($trNodes) - 1 . ' vote(s) found!');
+        }
     }
 
     /**
-     * @Given wait for the initial voting module
+     * @Then I should see :count attendees
      */
-    public function waitForTheInitialVotingModule()
+    public function iShouldSeeAttendees($count)
     {
+        $extensionNode = $this->getSession()
+            ->getPage()
+            ->find('css', '.tx-t3ee-voting-example');
 
-        $time = 5000; // time should be in milliseconds
-        $this->getSession()->wait($time, '(0 === jQuery.active)');
+        $trNodes = $extensionNode->findAll('css', 'table.attendees tr');
 
+        if (count($trNodes) <> $count) {
+            throw new \Exception('There are ' . count($trNodes) . ' attendee(s) found!');
+        }
+    }
+
+    /**
+     * @Then I should see the topic :topicLabel and :voteCount votes
+     */
+    public function iShouldSeeTheTopicAndVotes($topicLabel, $voteCount)
+    {
+        $extensionNode = $this->getSession()
+            ->getPage()
+            ->find('css', '.tx-t3ee-voting-example');
+
+        $rowNode = $extensionNode->find('css', sprintf('table tr:contains("%s")', $topicLabel));
+
+        $tdNode = $rowNode->findAll('css', 'td');
+
+        if (!preg_match('/' . $topicLabel . '/i', $tdNode[0]->getText())) {
+            throw new \Exception('The label "' . $topicLabel . '" couldn\'t be found');
+        }
+
+        if (!preg_match('/' . $voteCount . '/i', $tdNode[3]->getText())) {
+            throw new \Exception('The amount of ' . $voteCount . ' votes couldn\'t be found');
+        }
+    }
+
+    /**
+     * @When I press the :linkLabel link at the topic :topicLabel
+     */
+    public function iPressTheLinkAtTheTopic($linkLabel, $topicLabel)
+    {
+        $extensionNode = $this->getSession()
+            ->getPage()
+            ->find('css', '.tx-t3ee-voting-example');
+
+        if (is_null($extensionNode)) {
+            throw new \Exception('The extension container couldn\'t be found');
+        }
+
+        $trNode = $extensionNode->find('css', sprintf('table tr:contains("%s")', $topicLabel));
+        if (is_null($trNode)) {
+            throw new \Exception('The table row containing "' . $topicLabel . '" couldn\'t be found');
+        }
+
+        $linkNode = $linkLabel == 'Detail'
+            ? $trNode->findLink($topicLabel)
+            : $trNode->findLink($linkLabel);
+
+        if (is_null($linkNode)) {
+            throw new \Exception('The link "' . $linkLabel . '" couldn\'t be found');
+        }
+
+        $linkNode->click();
     }
 }
