@@ -50,7 +50,17 @@
   },
   "config": {
     "vendor-dir": "../../default.instance/vendor",
-    "bin-dir": "../../default.instance/bin"
+    "bin-dir": "../../default.instance/bin",
+    "preferred-install": {
+      "typo3/cms": "source",
+      "*": "dist"
+    }
+  },
+  "scripts": {
+    "post-autoload-dump": [
+      "mkdir -p ../../default.instance/typo3conf/ext/",
+      "[ -L ../../default.instance/typo3conf/ext/t3ee_voting_example ] || ln -snvf ../../../jenkins/t3ee_voting_example ../../default.instance/typo3conf/ext/t3ee_voting_example"
+    ]
   },
   "extra": {
     "typo3/cms": {
