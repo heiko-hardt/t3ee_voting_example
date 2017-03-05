@@ -1,11 +1,11 @@
 language: php
 
 php:
-  - 5.5
+  - 7.0
 
 env:
   matrix:
-    - TYPO3_VERSION=7.6.0
+    - TYPO3_VERSION=7.6.16
 
 # sudo: false
 
