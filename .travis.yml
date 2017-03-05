@@ -37,8 +37,6 @@ before_script:
   # require composer dependencies
   - composer require typo3/cms=$TYPO3_VERSION
   - composer require codeclimate/php-test-reporter
-
-  - ln -s ../../../heiko-hardt/t3ee_voting_example ../../default.instance/typo3conf/ext/t3ee_voting_example
   - cd ../../default.instance
 
   # export phpunit configuration

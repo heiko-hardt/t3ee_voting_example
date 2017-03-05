@@ -59,7 +59,7 @@
   "scripts": {
     "post-autoload-dump": [
       "mkdir -p ../../default.instance/typo3conf/ext/",
-      "[ -L ../../default.instance/typo3conf/ext/t3ee_voting_example ] || ln -snvf ../../../jenkins/t3ee_voting_example ../../default.instance/typo3conf/ext/t3ee_voting_example"
+      "[ -L ../../default.instance/typo3conf/ext/t3ee_voting_example ] || ln -snvf ../../../heiko-hardt/t3ee_voting_example ../../default.instance/typo3conf/ext/t3ee_voting_example"
     ]
   },
   "extra": {
