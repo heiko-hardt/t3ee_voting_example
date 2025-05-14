@@ -1,0 +1,50 @@
+---
+x-common: &common
+  environment:
+    setup:
+      # default: core, backend, frontend, extbase, fluid
+      coreExtensionsToLoad:
+        - belog
+        - beuser
+        - extensionmanager
+        - install
+        - lang
+        - recordlist
+        - rsaauth
+        - setup
+        - sv
+        - saltedpasswords
+        - t3skin
+        - tstemplate
+      testExtensionsToLoad:
+        - t3ee_voting_example
+      localConfigurationOverwrite:
+        MAIL:
+          transport: mbox
+          transport_mbox_file: /tmp/mail_file
+        BE:
+          installToolPassword: "$P$Cq5AoMs24xlYAmnlUekNCqVoEW6PF0/"
+        SYS:
+          isInitialInstallationInProgress: FALSE
+          sitename: "TYPO3 Development"
+    fixtures:
+      xmlDatabaseFixtures:
+        - /var/www/html/Tests/Acceptance/Maintenance/Fixtures/Database/be_users.xml
+        - /var/www/html/Tests/Acceptance/Maintenance/Fixtures/Database/pages.xml
+        - /var/www/html/Tests/Acceptance/Maintenance/Fixtures/Database/sys_template.xml
+
+default:
+  suites:
+    Frontend.Minimum:
+      features:
+        add: *common
+        delete: *common
+        detail: *common
+        edit: *common
+        list: *common
+      paths:
+        - "%paths.base%/Maintenance/Features"
+      contexts:
+        - Maintenance\Context\FeatureContext
+        - Maintenance\Context\TYPO3Context
+      environment: {}

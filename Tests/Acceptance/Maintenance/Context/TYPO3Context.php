@@ -2,56 +2,24 @@
 namespace Maintenance\Context;
 
 use Behat\Behat\Context\Context;
-use Behat\Testwork\Tester\Exception\TesterException;
-use Behat\Behat\Tester\Exception\PendingException;
-use Behat\Testwork\Exception\Cli;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
+use HeikoHardt\Behat\TYPO3Extension\Context\Typo3Context as BaseTypo3Context;
 
 use \HeikoHardt\T3eeVotingExample\Domain\Model\Topic;
 use \HeikoHardt\T3eeVotingExample\Domain\Model\Attendee;
 
-class TYPO3Context extends \HeikoHardt\Behat\TYPO3Extension\Context\Typo3Context implements Context
-{
+class TYPO3Context extends BaseTypo3Context implements Context {
 
-    /** @var \HeikoHardt\T3eeVotingExample\Domain\Repository\TopicRepository */
-    protected $topicRepository = null;
+    protected $typo3ObjectManager;
+    protected $topicRepository;
+    protected $typo3PersistenceManager;
 
     /** @BeforeScenario */
     public function before(BeforeScenarioScope $scope)
     {
-
-        try {
-            // setup core extensions
-            $this->setTYPO3CoreExtensionsToLoad(array('extbase', 'fluid'));
-
-            // setup test extensions
-            $this->setTYPO3TestExtensionsToLoad(array('typo3conf/ext/t3ee_voting_example'));
-
-            // extend default local configuration
-            $this->setTYPO3LocalConfiguration(array('SYS' => array('encryptionKey' => 'mysecretencryptionkey')));
-
-            // import initial db values
-            $this->setTYPO3DatasetToImport(array(
-                getenv('TYPO3_PATH_WEB') . '/typo3/sysext/core/Tests/Functional/Fixtures/pages.xml'
-            ));
-
-            // setup basic frontend page
-            $this->setTYPO3FrontendRootPage(
-                1,
-                array('typo3conf/ext/t3ee_voting_example/Tests/Acceptance/Maintenance/Fixtures/TypoScript/Setup.ts')
-            );
-
-            // boot typo3
-            $this->TYPO3Boot($this, $scope);
-
-            // prepare topic repository
-            $this->topicRepository = $this->typo3ObjectManager->get(
-                'HeikoHardt\\T3eeVotingExample\\Domain\\Repository\\TopicRepository'
-            );
-
-        } catch (\Exception $e) {
-        }
-
+        $this->typo3ObjectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
+        $this->typo3PersistenceManager = $this->typo3ObjectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager');
+        $this->topicRepository = $this->typo3ObjectManager->get('HeikoHardt\\T3eeVotingExample\\Domain\\Repository\\TopicRepository');
     }
 
     /**
@@ -71,7 +39,6 @@ class TYPO3Context extends \HeikoHardt\Behat\TYPO3Extension\Context\Typo3Context
             $topic->addAttendee($attendee);
 
             $this->topicRepository->add($topic);
-
         }
         $this->typo3PersistenceManager->persistAll();
     }
