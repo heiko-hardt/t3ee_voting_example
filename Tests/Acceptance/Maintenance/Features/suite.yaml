@@ -18,7 +18,7 @@ x-common: &common
         - tstemplate
       testExtensionsToLoad:
         - t3ee_voting_example
-      localConfigurationOverwrite:
+      localConfigurationOverride:
         MAIL:
           transport: mbox
           transport_mbox_file: /tmp/mail_file
